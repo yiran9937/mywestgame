@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:33
+-- @Last Modified time  : 2025-05-01 17:31:21
 local NPC = {}
 local 对话 = [[
 这个幻境的每一个角落，我都知道有什么，你想让我帮你找的话需要消耗一个天机密令哦！

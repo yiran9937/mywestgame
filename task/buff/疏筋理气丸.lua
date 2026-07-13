@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:35
+-- @Last Modified time  : 2025-07-30 20:23:41
 local 任务 = {
     名称 = '疏筋理气丸',
     --图标 = 1,
@@ -5,9 +9,6 @@ local 任务 = {
 }
 
 function 任务:任务初始化(玩家, ...)
-    -- self.时间 = os.time() + 3600 * 24
-    -- self.HP = 1000000
-    -- self.MP = 1000000
 end
 
 function 任务:任务上线(玩家)

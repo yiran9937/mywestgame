@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:35
+-- @Last Modified time  : 2025-05-07 10:39:08
 local 任务 = {
     名称 = '抗性符文',
     是否BUFF = true
@@ -48,6 +52,7 @@ end
 function 任务:抗性符文计算(玩家)
     if type(玩家) == 'table' then
         if type(self.属性) == 'string' then
+            print(self.属性)
             玩家.抗性[self.属性] = 玩家.抗性[self.属性] + self.数值
         else
             for k, v in pairs(self.属性) do

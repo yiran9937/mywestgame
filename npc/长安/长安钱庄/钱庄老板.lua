@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:34
+-- @Last Modified time  : 2025-06-25 14:52:51
 local NPC = {}
 local 对话 = [[
 恭喜发财这里是最大的连锁钱庄，提供零存整取，整存零取，存钱不取，不存不取等多项服务，另外还有保险箱特殊服务!客官，想做点什么?
@@ -47,12 +51,6 @@ function NPC:NPC菜单(玩家, i)
                 return "请输入正确的安全码"
             end
         end
-
-
-
-
-
-
     elseif i == '4' then
     end
 end

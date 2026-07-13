@@ -75,7 +75,7 @@ menu
 1|挑战
 99|我认错人了
 ]]
-function 事件:NPC对话(玩家, i, NPC)
+function 事件:NPC对话(玩家, NPC)
     if NPC and not NPC:是否战斗中() then
         return 对话
     else

@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:32
+-- @Last Modified time  : 2025-07-30 18:51:32
 local 物品 = {
     名称 = '疏筋理气丸',
     叠加 = 999,
@@ -39,9 +43,6 @@ function 物品:使用(对象)
             end
         end
     end
-
 end
-
-
 
 return 物品

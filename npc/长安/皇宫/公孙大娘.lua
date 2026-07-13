@@ -21,6 +21,7 @@ function NPC:NPC菜单(玩家, i)
 
         return r:拜师('剑舞')
     elseif i == '2' then
+	    ::连续::
         local r = 玩家:取参战孩子()
         if not r then
             return "请先将要修炼的孩子设置参战状态"
@@ -39,7 +40,9 @@ function NPC:NPC菜单(玩家, i)
         if r then
             r:修炼(tonumber(i), '剑诀')
         end
+		goto 连续
     elseif i == '3' then
+	    ::连续::
         local r = 玩家:取参战孩子()
         if not r then
             return "请先将要修炼的孩子设置参战状态"
@@ -58,6 +61,7 @@ function NPC:NPC菜单(玩家, i)
         if r then
             r:修炼(tonumber(i), '高级剑诀', true)
         end
+		goto 连续
     elseif i == '4' then
     end
 end

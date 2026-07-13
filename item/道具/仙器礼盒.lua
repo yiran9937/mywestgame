@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:32
+-- @Last Modified time  : 2025-06-17 18:41:05
 local 物品 = {
     名称 = '仙器礼盒',
     叠加 = 999,
@@ -5,11 +9,12 @@ local 物品 = {
     类型 = 0,
     对象 = 1,
     条件 = 2,
-    绑定 = false
+    绑定 = false,
+    参数 = 1,
 }
 function 物品:初始化()
     if not self.参数 then
-        self.参数=1
+        self.参数 = 1
     end
 end
 
@@ -34,16 +39,17 @@ function 物品:使用(对象)
     else
         名称 = _鞋子[math.random(#_鞋子)]
     end
+    -- print("生成装备:","名称=",名称,"等级=",self.参数)
     local r = 生成装备 { 名称 = 名称, 等级 = self.参数 }
     if r then
-        if 对象:添加物品({r}) then
+        if 对象:添加物品({ r }) then
             self.数量 = self.数量 - 1
         end
     end
 end
 
 function 物品:取描述()
-    return "#Y获得"..self.参数.."阶随机仙器"
+    return "#Y获得" .. self.参数 .. "阶随机仙器"
 end
 
 return 物品

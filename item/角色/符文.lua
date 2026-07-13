@@ -5,10 +5,12 @@ local 物品 = {
     类型 = 0,
     对象 = 1,
     条件 = 2,
+    -- 使用等级=0,
     绑定 = false
 }
 
 function 物品:使用(对象)
+    print(type(对象),对象.等级)
     if 对象.等级 < self.使用等级 then
         对象:常规提示('#Y使用该符文需要等级大于%s。', self.使用等级)
         return

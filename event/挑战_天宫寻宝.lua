@@ -176,7 +176,7 @@ function 事件:进入副本(玩家)
 end
 
 --=======================================================
-function 事件:NPC对话(玩家, i, NPC)
+function 事件:NPC对话(玩家, NPC)
     if NPC.战斗中 then
         return
     end

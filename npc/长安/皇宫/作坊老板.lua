@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:34
+-- @Last Modified time  : 2025-04-10 13:50:00
 local NPC = {}
 local 对话 = [[
 我是负责作坊的总管,在我这里可以加入和脱离作坊，也可以向我请教熟练度来提升等级

@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:32
+-- @Last Modified time  : 2025-08-15 14:02:55
 local 物品 = {
     名称 = '鎏金自选卡',
     叠加 = 0,
@@ -12,10 +16,9 @@ function 物品:初始化()
 
 end
 
-
-local _鎏金宝宝范围 = {'龙马','北冥龙君','画皮娘子','孔雀明王','水月镜花','龙兔','妙音鸾女'}  --,'孟极'  ,'惜红衣'
+local _鎏金宝宝范围 = { '龙马', '北冥龙君', '妙音鸾女', '画皮娘子', '孔雀明王', '水月镜花', '龙兔' } --,'孟极'  ,'惜红衣'
 local _对话 = [[
-请选择你想要的召唤兽！ 
+请选择你想要的召唤兽！
 menu
 1|龙马
 2|北冥龙君
@@ -37,8 +40,8 @@ function 物品:使用(对象)
     local r = 对象:选择窗口(_对话)
     if r then
         for i, v in ipairs(_鎏金宝宝范围) do
-            if r==tostring(i) then
-                if 对象:添加召唤(生成召唤 { 名称 =v }) then
+            if r == tostring(i) then
+                if 对象:添加召唤(生成召唤 { 名称 = v }) then
                     self.数量 = self.数量 - 1
                     break
                 end
@@ -46,7 +49,5 @@ function 物品:使用(对象)
         end
     end
 end
-
-
 
 return 物品

@@ -1,3 +1,7 @@
+-- @Author              : GGELUA
+-- @Last Modified by    : baidwwy
+-- @Date                : 2025-04-09 20:22:32
+-- @Last Modified time  : 2025-04-28 21:13:35
 local 物品 = {
     名称 = '高级悔梦石',
     叠加 = 999,
@@ -6,6 +10,7 @@ local 物品 = {
     对象 = 0,
     条件 = 0,
     绑定 = false,
+    参数 = 4,
 }
 function 物品:初始化()
     if not self.参数 then

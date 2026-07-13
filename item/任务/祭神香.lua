@@ -1,7 +1,7 @@
 -- @Author              : GGELUA
 -- @Last Modified by    : baidwwy
 -- @Date                : 2022-07-03 15:56:58
--- @Last Modified time  : 2022-07-04 10:34:53
+-- @Last Modified time  : 2025-04-09 23:10:09
 local 物品 = {
     名称 = '祭神香',
     叠加 = 999,
@@ -23,6 +23,7 @@ function 物品:使用(对象)
     --todo 任务验证  范围验证
     local map = 对象:取当前地图()
     if map and map.id == 101386 then
+        -- print(对象.X,对象.Y)
         if 对象.X < 115 and 对象.X > 105 and 对象.Y < 155 and 对象.Y > 125 then
             local rw = 对象:取任务('孔庙祭祀_祭拜')
             if rw then
