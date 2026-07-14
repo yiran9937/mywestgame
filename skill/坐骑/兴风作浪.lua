@@ -22,7 +22,7 @@ end
 
 function 法术:效果计算(坐骑)
 
-    local zjxz = 1
+    local zjxz = 1.2
     if 坐骑.几座 == 2 or 坐骑.几座 == 4 then
         zjxz = 1.2
     end

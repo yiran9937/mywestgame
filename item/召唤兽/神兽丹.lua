@@ -9,7 +9,7 @@ local 物品 = {
 }
 
 function 物品:使用(对象)
-    if 对象:添加经验(100000) then
+    if 对象:添加经验(1000000) then
         self.数量 = self.数量 - 1
     else
         return '#Y 当前召唤兽已达等级上限！'

@@ -19,7 +19,7 @@ function 法术:计算(坐骑, 召唤)
 end
 
 function 法术:效果计算(坐骑)
-    local zjxz = 1
+    local zjxz = 1.2
     if 坐骑.几座 == 2 or 坐骑.几座 == 4 then
         zjxz = 1.2
     end
@@ -27,7 +27,7 @@ function 法术:效果计算(坐骑)
     local wlxs = (坐骑.根骨 * 0.7 + 坐骑.灵性 * 0 + 坐骑.力量 * 0.3) * zjxz / 3.6 + self.熟练度 / 10000 /1
     local kzs = (坐骑.根骨 * 0.7 + 坐骑.灵性 * 0 + 坐骑.力量 * 0.3) * zjxz / 7.2 + self.熟练度 / 10000 / 2
     local kzd = (坐骑.根骨 * 0.7 + 坐骑.灵性 * 0 + 坐骑.力量 * 0.3) * zjxz / 4.8 + self.熟练度 / 10000 /1.333333333
-    local kssc = (坐骑.根骨 * 0.7 + 坐骑.灵性 * 0 + 坐骑.力量 * 0.3) * 125 / 3 + self.熟练度 * 1500 /100000
+    local kssc = (坐骑.根骨 * 0.7 + 坐骑.灵性 * 0 + 坐骑.力量 * 0.3) * zjxz * 125 / 3 + self.熟练度 * 1500 /100000
     hp = math.ceil(hp * 1000) / 1000
     wlxs = math.ceil(wlxs * 1000) / 1000
     kzs = math.ceil(kzs * 1000) / 1000
