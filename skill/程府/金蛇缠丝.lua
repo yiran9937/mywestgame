@@ -110,10 +110,10 @@ end
 
 function BUFF:BUFF添加后(buff, 目标)
     if self == buff then
-        目标:删除BUFF('混乱')
+        -- 目标:删除BUFF('混乱')
         目标:删除BUFF('昏睡')
-        目标:删除BUFF('中毒')
-        目标:删除BUFF('遗忘')
+        -- 目标:删除BUFF('中毒')
+        -- 目标:删除BUFF('遗忘')
     end
 end
 

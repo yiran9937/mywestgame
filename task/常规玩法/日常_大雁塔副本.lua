@@ -352,7 +352,7 @@ end
 function 任务:完成一层(玩家)
     self.进度 = 4
     self.地图[1]:删除NPC(self.NPC)
-    local 经验 = 1500000
+    local 经验 = 1500000 * 3
     local 大雁塔积分 = 20
     local r = 玩家:取任务('日常_大雁塔副本')
     if r then
@@ -372,7 +372,7 @@ end
 function 任务:完成二层(玩家)
     self.进度 = 10
     self.地图[2]:删除NPC(self.NPC)
-    local 经验 = 2000000
+    local 经验 = 2000000 * 3
     local 大雁塔积分 = 40
     local r = 玩家:取任务('日常_大雁塔副本')
     if r then
@@ -392,7 +392,7 @@ end
 function 任务:完成三层(玩家)
     self.进度 = 18
     self.地图[3]:删除NPC(self.NPC)
-    local 经验 = 2500000
+    local 经验 = 2500000 * 3
     local 大雁塔积分 = 120
     local r = 玩家:取任务('日常_大雁塔副本')
     if r then
@@ -412,7 +412,7 @@ end
 function 任务:完成四层(玩家)
     self.进度 = 21
     self.地图[4]:删除NPC(self.NPC)
-    local 经验 = 3000000
+    local 经验 = 3000000 * 3
     local 大雁塔积分 = 240
     local r = 玩家:取任务('日常_大雁塔副本')
     if r then
@@ -432,7 +432,7 @@ end
 function 任务:完成五层(玩家)
     self.进度 = 24
     self.地图[5]:删除NPC(self.NPC)
-    local 经验 = 4000000
+    local 经验 = 4000000 * 3
     local 大雁塔积分 = 400
     local r = 玩家:取任务('日常_大雁塔副本')
     if r then
@@ -452,7 +452,7 @@ end
 function 任务:完成六层(玩家)
     self.进度 = 27
     self.地图[6]:删除NPC(self.NPC)
-    local 经验 = 5000000
+    local 经验 = 5000000 * 3
     local 大雁塔积分 = 450
     local r = 玩家:取任务('日常_大雁塔副本')
     if r then
@@ -472,7 +472,7 @@ function 任务:完成六层(玩家)
 end
 
 function 任务:完成七层(玩家)
-    local 经验 = 6000000
+    local 经验 = 6000000 * 3
     local 大雁塔积分 = 500
     local r = 玩家:取任务('日常_大雁塔副本')
     if r then

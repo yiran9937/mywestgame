@@ -132,7 +132,7 @@ local _掉落 = { --所有几率总和不能大于总几率
 }
 function 任务:掉落包(玩家, 次数)
     local 银子 = math.floor(20000)
-    local 经验 = math.floor(84521 * (1 + 次数 * 0.12)) -----84521
+    local 经验 = math.floor(84521 * (1 + 次数 * 0.12)) * 3 -----84521
     local 法宝经验 = math.floor(140 + 次数 * 12)
     if 玩家.是否队长 then
         经验 = math.floor(经验 * 1.05)

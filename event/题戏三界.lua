@@ -14,7 +14,7 @@ local _开启日 = { --true开启--false
     ["0"] = true,
 }
 function 事件:事件初始化()
-    -- 在这里修改参加活动 等级限制 
+    -- 在这里修改参加活动 等级限制
     -- 活动早上10.30点开始 晚上22点结束
     self.等级 = 80
     self.转生 = 1
@@ -89,7 +89,7 @@ function 事件:发放经验奖励()
         P = self:取玩家接口(nid)
         if P then
             local xs = math.random(10) + 210543
-            local 经验 = P.转生 * xs + P.等级 * 1203
+            local 经验 = ( P.转生 * xs + P.等级 * 1203 ) * 3
             P:添加任务经验(经验)
             if math.random(100) < 10 then
                 table.insert(self.幸运参与奖, P.nid)

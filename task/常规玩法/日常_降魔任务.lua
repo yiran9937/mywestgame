@@ -282,11 +282,11 @@ function 任务:掉落包(玩家)
     local 次数 = 玩家.其它.降魔次数
 
     local 银子 = math.floor(100000)
-    local 经验 = math.floor(727548 * (1 + 次数 * 0.072))
+    -- local 经验 = math.floor(727548 * (1 + 次数 * 0.072))
     local 法宝经验 = math.floor(360 + 次数 * 12)
-   local 经验 =  math.floor(989854 * (1 + 玩家.其它.降魔任务 * 0.072))--489854
+    local 经验 =  math.floor(989854 * (1 + 玩家.其它.降魔任务 * 0.072) * 3)--489854
     -- if 玩家:判断等级是否高于(200) and 玩家:判断等级是否低于(143)
-     
+
     --     return
     -- end
 

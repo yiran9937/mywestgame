@@ -81,7 +81,7 @@ function 任务:任务NPC菜单(玩家, NPC, i)
     if NPC.名称 == "大理寺官员" then
         if i and i ~= "1" then
             -- local 银子 = 5000
-            local 经验 = 150000
+            local 经验 = 150000 * 3
             if tostring(self.答案) == i then
                 if self.计时 > os.time() then
                     玩家:常规提示("#Y回答正确！")

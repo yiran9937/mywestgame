@@ -131,8 +131,8 @@ function 任务:掉落包(玩家, 次数)
 
     local 师贡 = math.floor(2000 * (1 + 次数 * 0.22))
     local 银子 = math.floor(1000 * (1 + 次数 * 0.22))
-    local 经验 = math.floor(84521 * (1 + 次数 * 0.12))
-    local 法宝经验 = math.floor(140 + 次数 * 12)
+    local 经验 = math.floor(84521 * (1 + 次数 * 0.12)) * 3
+    local 法宝经验 = math.floor(140 + 次数 * 12) * 3
 
     if 玩家.是否队长 then
         经验 = math.floor(经验 * 1.05)

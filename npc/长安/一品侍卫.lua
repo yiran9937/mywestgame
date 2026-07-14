@@ -25,7 +25,7 @@ local 周双倍时长 = 24
 
 function NPC:NPC对话(玩家)
     NPC.队伍对话 = true
-    local r = 玩家:取任务('双倍时间')
+    local r = 玩家:取任务('五倍时间')
     if r and r.冻结 then
         return string.format(对话[3], r.剩余时间 // 60, 周双倍时长 - 玩家:取双倍时间数据())
     end
@@ -49,13 +49,13 @@ end
 function NPC:领取双倍(玩家, 时间)
     if 24 - 玩家:取双倍时间数据() >= 时间 then
         玩家:领取双倍时间(时间)
-        local r = 玩家:取任务('双倍时间')
+        local r = 玩家:取任务('五倍时间')
 
         if r then
             r:增加时长(玩家, 时间)
             return string.format(对话[2], 时间)
         else
-            local n = 生成任务 {名称 = '双倍时间'}
+            local n = 生成任务 {名称 = '五倍时间'}
             if n and n:添加任务(玩家, 时间) then
                 return string.format(对话[2], 时间)
             end
@@ -64,7 +64,7 @@ function NPC:领取双倍(玩家, 时间)
     return '本周没有剩余可用双倍时间了#51'
 end
 function NPC:冻结双倍(玩家)
-    local r = 玩家:取任务('双倍时间')
+    local r = 玩家:取任务('五倍时间')
     if r and not r.冻结 then
         r:冻结双倍(玩家)
         return '已经帮你冻结了双倍时间#51'
@@ -74,7 +74,7 @@ function NPC:冻结双倍(玩家)
 end
 
 function NPC:恢复双倍(玩家)
-    local r = 玩家:取任务('双倍时间')
+    local r = 玩家:取任务('五倍时间')
     if r and r.冻结 then
         local 恢复时间 = r:恢复冻结(玩家)
         return string.format('已经帮你解开了冻结的双倍时间#51，你当前的身上的双倍时间是%s分钟，赶快去奋勇杀敌吧。', 恢复时间//60)

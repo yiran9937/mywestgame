@@ -151,7 +151,7 @@ function 任务:掉落包(玩家)
             if rr and rr.nid == r.nid then
                 if v:取活动限制次数('寻芳' .. self.进度) < 1 then
                     v:增加活动限制次数('寻芳' .. self.进度)
-                    local 经验 = 1000000 + self.进度 * 500000
+                    local 经验 = ( 1000000 + self.进度 * 500000 ) * 3
                     local 寻芳积分 = self.进度 * 100
                     v:添加任务经验(经验, "寻芳")
                     v:添加指定积分(寻芳积分, "寻芳积分")
