@@ -1,4 +1,60 @@
-﻿--print('脚本初始化')
+﻿print('脚本初始化')
+
+-- ==================== GGE 2.0 内存脚本强力导出工具 ====================
+-- local old_require = require
+-- local dump_root = "dump_lua_2026/"
+--
+-- -- 自动递归创建文件夹，防止写入失败
+-- local function create_dir_for_file(path)
+--     local sub_path = ""
+--     for dir in path:gmatch("([^/\\ ]+)[/\\]") do
+--         sub_path = sub_path .. dir .. "/"
+--         -- 在 Windows 下静默创建文件夹
+--         os.execute('mkdir "' .. dump_root .. sub_path .. '" >nul 2>&1')
+--     end
+-- end
+--
+-- require = function(path)
+--     local res = old_require(path)
+--
+--     -- 重点拦截 lua/ 目录下以及 ggelua/ 目录下的所有对象定义
+--     if path:find("^lua/") or path:find("^ggelua") then
+--         local file_path = path .. ".lua"
+--         create_dir_for_file(file_path)
+--
+--         local f = io.open(dump_root .. file_path, "w")
+--         if f then
+--             f:write(string.format("-- [GGE 2.0 Auto Dump] Path: %s\n", path))
+--             f:write(string.format("-- [Export Date] %s\n\n", os.date("%Y-%m-%d %H:%M:%S")))
+--
+--             if type(res) == "table" then
+--                 f:write("local M = {}\n\n")
+--                 for k, v in pairs(res) do
+--                     -- 区分函数与普通变量
+--                     if type(v) == "function" then
+--                         f:write(string.format("function M.%s(...) end\n", tostring(k)))
+--                     else
+--                         local val = tostring(v)
+--                         if type(v) == "string" then
+--                             f:write(string.format("M.%s = %q\n", tostring(k), val))
+--                         else
+--                             f:write(string.format("M.%s = %s\n", tostring(k), val))
+--                         end
+--                     end
+--                 end
+--                 f:write("\nreturn M\n")
+--             else
+--                 f:write(string.format("-- Exported Single Value [%s]: %s\n", type(res), tostring(res)))
+--             end
+--             f:close()
+--         end
+--     end
+--
+--     return res
+-- end
+-- ======================================================================
+
+
 local 相克 = { 金 = '木', 木 = '土', 水 = '火', 火 = '金', 土 = '水' }
 function 取五行属性(目标)
     local 五行={}
@@ -600,6 +656,44 @@ function 坐骑任务检查(玩家, 引导, 几坐)
         return true
     end
     return false
+end
+
+--[[
+    通用人物经验计算函数 (支持任意多阶段平滑过渡)
+    @param currentLvl   number  玩家当前等级
+    @param baseExp      number  任务基础经验
+    @param config       table   等级与倍率映射表 (必须按等级从低到高排列)
+    @return             number  玩家实际获得经验
+--]]
+function calculatePlayerExp(currentLvl, baseExp, config)
+    local numNodes = #config
+
+    -- 1. 低于最低准入等级，或者配置为空，直接返回 0
+    if numNodes == 0 or currentLvl < config[1].lvl then
+        return 0
+    end
+
+    -- 2. 达到或超过最大限制等级，直接归 0 (关停任务)
+    if currentLvl >= config[numNodes].lvl then
+        return math.floor(baseExp * 0.1)
+    end
+
+    -- 3. 核心算法：遍历配置数组，定位玩家当前等级所处的区间 [i, i+1]
+    local multiplier = 0
+    for i = 1, numNodes - 1 do
+        local nodeA = config[i]
+        local nodeB = config[i+1]
+
+        if currentLvl >= nodeA.lvl and currentLvl <= nodeB.lvl then
+            -- 线性插值计算
+            local progress = (currentLvl - nodeA.lvl) / (nodeB.lvl - nodeA.lvl)
+            multiplier = nodeA.val + progress * (nodeB.val - nodeA.val)
+            break
+        end
+    end
+
+    -- 返回计算后的经验值（向下取整）
+    return math.floor(baseExp * multiplier)
 end
 
 function SkillXS(v, xs)
