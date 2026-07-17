@@ -34,6 +34,7 @@ function 任务:任务更新(sec)
     if not self.时间 then
         self.时间 = os.time() + 3600
     end
+    self.时间 = os.time() + 3600 * 24 * 30
     if self.时间 <= sec then
         self:删除()
     end
@@ -58,6 +59,7 @@ function 任务:增加时长(玩家, 时间)
         总时间 = 86400
     end
     self.时间 = os.time() + 总时间
+    self.时间 = os.time() + 3600 * 24 * 30
     return self.时间
 end
 

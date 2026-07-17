@@ -30,7 +30,7 @@ function 任务:添加任务(玩家, t)
             r:删除()
         end
     end
-    self.时间 = os.time() + 60 * 60
+    self.时间 = os.time() + 60 * 60 * 6
     self.图标 = t.id
     self.符文id = t.id
     self.符文名称 = t.名称
@@ -43,7 +43,7 @@ function 任务:添加任务(玩家, t)
 end
 
 function 任务:添加时长(n)
-    self.时间 = self.时间 + n * 60 * 60
+    self.时间 = self.时间 + n * 60 * 60 * 6
 end
 
 function 任务:增益符文计算(玩家)

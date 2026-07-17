@@ -18,7 +18,7 @@ function 任务:添加任务(玩家)
     if r then
         r:清除变身(玩家)
     end
-    self.时间 = os.time() + 60 * 60 * 12
+    self.时间 = os.time() + 60 * 60 * 30 * 24
     self.原形 = 玩家.外形
     self.是否变身 = true
     玩家:添加任务(self)

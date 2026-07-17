@@ -28,14 +28,14 @@ function 任务:添加任务(玩家)
         r:添加时长(1)
         return
     end
-    self.时间 = os.time() + 10 * 60
+    self.时间 = os.time() + 60 * 60 * 6
     玩家:地图对象开关神行符(玩家.nid, true)
     玩家:添加任务(self)
     return true
 end
 
 function 任务:添加时长(n)
-    self.时间 = self.时间 + n * 10 * 60
+    self.时间 = self.时间 + n * 60 * 60 * 6
 end
 
 function 任务:任务取详情(玩家)
