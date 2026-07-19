@@ -22,19 +22,19 @@ end
 
 
 function 任务:添加任务(玩家, 召唤)
-    self.时间 = os.time() + 60 * 60
+    self.时间 = os.time() + 60 * 60 * 24 * 30
     self.对象id = 召唤.nid
     玩家:添加任务(self)
     return true
 end
 
 function 任务:添加时长(时间)
-    self.时间 = self.时间 + 时间 * 60
+    self.时间 = self.时间 + 时间 * 60 * 24 * 30
     return true
 end
 
 function 任务:重置任务(玩家, 召唤)
-    self.时间 = os.time() + 60 * 60
+    self.时间 = os.time() + 60 * 60 * 24 * 30
     self.对象id = 召唤.nid
     return true
 end

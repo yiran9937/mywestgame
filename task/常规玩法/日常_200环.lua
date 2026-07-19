@@ -138,12 +138,12 @@ function 任务:设置交付人(玩家)
 end
 
 function 任务:添加任务(玩家)
-    self.时间 = os.time() + 86400
+    self.时间 = os.time() + 86400 * 10
     self.分类 = math.random(2)
     if math.random(100) < 20 then
         self.分类 = 3
     end
-    if 玩家.转生 < 1 then
+    if 玩家.转生 < 0 then
         return "领取该任务需要1转"
     end
 
@@ -151,7 +151,7 @@ function 任务:添加任务(玩家)
     if self.分类 == 2 and not 玩家:取包裹空位() then
         return "你包裹满了 不能接收任务品"
     end
-    if not 玩家:扣除体力(200) then
+    if not 玩家:扣除体力(1) then
         return "领取该任务需要200点体力"
     end
     self.进度 = 0
@@ -162,14 +162,14 @@ function 任务:添加任务(玩家)
     elseif self.分类 == 3 then --杀敌
         self:添加杀敌任务(玩家)
     end
-    玩家:增加周限次数("200环")
+    -- 玩家:增加周限次数("200环")
     玩家:添加任务(self)
     return self.最后对话
 end
 
 function 任务:添加寻人任务(玩家)
     self:设置交付人(玩家)
-    self.时间 = os.time() + 86400
+    self.时间 = os.time() + 86400 * 10
     self.进度 = self.进度 + 1
     self.提示 = math.random(#_寻人对话)
     self.最后对话 = string.format(_寻人对话[self.提示], self.交付人.名称)
@@ -186,7 +186,7 @@ local _物品 = {
 
 function 任务:添加寻物任务(玩家)
     self:设置交付人(玩家)
-    self.时间 = os.time() + 86400
+    self.时间 = os.time() + 86400 * 10
     self.进度 = self.进度 + 1
     self.物品需求 = _物品[math.random(#_物品)]
 
@@ -208,7 +208,7 @@ local _敌人 = {
 function 任务:添加杀敌任务(玩家)
     self:设置交付人(玩家)
     self.进度 = self.进度 + 1
-    self.时间 = os.time() + 86400
+    self.时间 = os.time() + 86400 * 10
     self.敌人 = _敌人[math.random(#_敌人)]
     if self.敌人 == "蟠桃神灵" then
         self.敌人寻路 = "#u#[1217|39|82|$蟠桃神灵#]#u"
@@ -222,7 +222,8 @@ function 任务:添加杀敌任务(玩家)
     self.最后对话 = string.format(_杀敌对话[self.提示], self.交付人.名称, self.敌人, self.交付人.名称)
 end
 
-local _药品 = { "修罗玉", "夜叉石", "玫瑰仙叶", "海蓝石", "仙鹿茸", "千年熊胆" }
+-- local _药品 = { "修罗玉", "夜叉石", "玫瑰仙叶", "海蓝石", "仙鹿茸", "千年熊胆" }
+local _药品 = { "夜叉石", "海蓝石" }
 
 function 任务:完成(玩家)
     if self.进度 >= 200 then
@@ -249,8 +250,12 @@ function 任务:完成(玩家)
     elseif self.分类 == 3 then --杀敌
         self:添加杀敌任务(玩家)
     end
-    玩家:添加银子(math.floor(self.进度 * 200), "200环")
+    玩家:添加银子(math.floor(self.进度 * 1000), "200环")
     玩家:添加仙玉(3)
+	local 掉落包1 = 取掉落包('日常','任务200环')
+    if 掉落包1 then
+        奖励掉落包物品(玩家, 掉落包1, _广播)
+    end
     if math.random(100) < 10 then
         local r = 生成物品 { 名称 = _药品[math.random(#_药品)], 数量 = 5 }
         玩家:添加物品({ r })
@@ -268,7 +273,7 @@ local _掉落 = {
 }
 
 function 任务:掉落包(玩家)
-    玩家:添加银子(math.floor(self.进度 * 200), "200环")
+    玩家:添加银子(math.floor(self.进度 * 1000), "200环")
     local t = false
     while not t do
         for _, v in ipairs(_掉落) do

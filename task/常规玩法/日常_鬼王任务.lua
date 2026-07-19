@@ -270,7 +270,8 @@ function 任务:战斗初始化(玩家, NPC)
 
         self:加入敌方(1, 生成战斗怪物(怪物属性))
 
-        for i = 1, 5 + math.floor(r.次数 * 0.4) do
+        -- for i = 1, 5 + math.floor(r.次数 * 0.4) do
+        for i = 1, 5 do
             local 怪物属性 = {
                 外形 = _外形[math.random(#_外形)],
                 名称 = _时辰[math.random(#_时辰)] .. _时刻[math.random(#_时刻)] .. _小怪[math.random(#_小怪)

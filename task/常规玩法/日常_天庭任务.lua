@@ -128,9 +128,9 @@ local TianTingConfig = {
 }
 
 function 任务:掉落包(玩家, 次数)
-    if 玩家:判断等级是否高于(120) then
-        return
-    end
+    -- if 玩家:判断等级是否高于(120) then
+    --     return
+    -- end
 
     local 师贡 = math.floor(10000 * (1 + 次数 * 0.22) * 0.75)
     local 银子 = math.floor(5000 * (1 + 次数 * 0.22) * 0.75)
@@ -149,9 +149,9 @@ function 任务:掉落包(玩家, 次数)
     end
 
     local realExp = calculatePlayerExp(玩家.等级, 经验, TianTingConfig)
-    玩家:添加经验(realExp)
-    玩家:添加参战召唤兽经验(经验 * 1.5)
-    -- 玩家:添加任务经验(经验, "天庭")
+    -- 玩家:添加经验(realExp)
+    -- 玩家:添加参战召唤兽经验(经验 * 1.5)
+    玩家:添加任务经验(经验, "天庭")
     玩家:添加法宝经验(法宝经验, "天庭")
     玩家:添加坐骑经验(20)
 

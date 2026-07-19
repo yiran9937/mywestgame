@@ -138,15 +138,18 @@ function 任务:掉落包(玩家, 次数)
         经验 = math.floor(经验 * 1.05)
         师贡 = math.floor(师贡 * 1.05)
         银子 = math.floor(银子 * 1.05)
-        local t = 玩家:取物品是否存在('三界符')
-        if not t then
-            玩家:添加物品({ 生成物品 { 名称 = '三界符', 数量 = 1 } })
-        end
     end
 
     玩家:添加任务经验(经验, "抓鬼")
     玩家:添加法宝经验(法宝经验, "抓鬼")
     玩家:添加坐骑经验(1)
+	
+    if 玩家.是否队长 then
+        local t = 玩家:取物品是否存在('三界符')
+        if not t then
+            玩家:添加物品({ 生成物品 { 名称 = '三界符', 数量 = 1 } })
+        end
+    end
 
     玩家:增加活动限制次数('抓鬼任务')
     if 玩家:取活动限制次数('抓鬼任务') > 150 then
@@ -182,7 +185,7 @@ end
 function 任务:NPC菜单(玩家, i, NPC)
     if i == '1' then
         local sf = 玩家:进入战斗('scripts/task/常规玩法/日常_抓鬼任务.lua', self)
-        玩家:自动任务_战斗结束(sf)
+        -- 玩家:自动任务_战斗结束(sf)
     end
 end
 
@@ -191,7 +194,7 @@ function 任务:任务攻击事件(玩家, NPC)
         local r = 玩家:取任务("日常_抓鬼任务")
         if r and r.NPC == NPC.nid then
             local sf = 玩家:进入战斗('scripts/task/常规玩法/日常_抓鬼任务.lua', NPC)
-            玩家:自动任务_战斗结束(sf)
+            -- 玩家:自动任务_战斗结束(sf)
             return
         end
         return "我认识你么？"

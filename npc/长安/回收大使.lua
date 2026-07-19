@@ -61,6 +61,8 @@ function NPC:NPC给予(玩家, cash, items)
                 xy = 30000
             elseif items[1].等级 == 5 then
                 xy = 5000
+			elseif items[1].等级 == 1 then
+                xy = 5
             else
                 return '神兵倒是神兵，可是你这等级不够看啊。#18'
             end

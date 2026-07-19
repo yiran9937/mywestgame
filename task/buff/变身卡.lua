@@ -91,7 +91,7 @@ function 任务:任务战斗开始(对象, 玩家) --对象是战斗对象数据
 end
 
 function 任务:添加时长(玩家, n)
-    self.时间 = self.时间 + n * 60 * 60
+    self.时间 = self.时间 + n * 60 * 60 * 24 * 30
 end
 
 function 任务:添加任务2(玩家, t)
@@ -104,7 +104,7 @@ function 任务:添加任务2(玩家, t)
             r:清除变身(玩家)
         end
     end
-    self.时间 = os.time() + 6 * 60 * 60
+    self.时间 = os.time() + 60 * 60 * 24 * 30
     self.原形 = 玩家.外形
     self.是否变身 = t.属性类型 == 1
     self.等级 = t.等级

@@ -30,7 +30,7 @@ function 任务:添加任务(玩家, t)
             r:删除()
         end
     end
-    self.时间 = os.time() + 60 * 60 * 6
+    self.时间 = os.time() + 60 * 60 * 24 * 30
     self.图标 = t.id
     self.符文id = t.id
     self.符文名称 = t.名称
@@ -43,7 +43,7 @@ function 任务:添加任务(玩家, t)
 end
 
 function 任务:添加时长(n)
-    self.时间 = self.时间 + n * 60 * 60 * 6
+    self.时间 = self.时间 + n * 60 * 60 * 24 * 30
 end
 
 function 任务:增益符文计算(玩家)
@@ -51,11 +51,11 @@ function 任务:增益符文计算(玩家)
         玩家.最大魔法 = 玩家.最大魔法 + self.数值
         玩家.魔法 = 玩家.魔法 + self.数值
     elseif self.符文名称 == '甲骨强身符' then
-        玩家.速度 = 玩家.速度 + self.数值
+        玩家.速度 = 玩家.速度 + self.数值 * 2
     elseif self.符文名称 == '甲骨金刚符' then
         -- 法术消耗减少 10%】
     else
-        玩家.抗性[self.属性] = 玩家.抗性[self.属性] + self.数值
+        玩家.抗性[self.属性] = 玩家.抗性[self.属性] + self.数值 * 2
     end
 end
 

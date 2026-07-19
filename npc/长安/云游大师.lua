@@ -18,7 +18,7 @@ function NPC:NPC菜单(玩家, i)
         if r then
             return "你身上已经有该任务了！"
         end
-        if 玩家:取活动限制次数("五环") >= 1 then
+        if 玩家:取活动限制次数("五环") >= 200 then
             return "今天你已经完成1次该任务了,请明天再来"
         end
         if 玩家.转生 == 0 and 玩家.等级 < 80 then

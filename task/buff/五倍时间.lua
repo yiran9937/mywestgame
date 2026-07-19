@@ -37,7 +37,7 @@ function 任务:添加任务(玩家, 时间)
         return false
     end
     玩家:添加任务(self)
-    self.时间 = os.time() + 时间 * 3600
+    self.时间 = os.time() + 时间 * 3600 * 24 * 30
     self.冻结 = false
     return true
 end
@@ -46,7 +46,7 @@ function 任务:增加时长(玩家, 时间)
         return false
     end
     local 剩余时间 = self.时间 - os.time()
-    self.时间 = os.time() + 时间 * 3600 + 剩余时间
+    self.时间 = os.time() + 时间 * 3600 * 24 * 30 + 剩余时间
     return self.时间
 end
 

@@ -86,7 +86,7 @@ function 任务:开始除草(玩家)
     if map.id ~= self.mapid then
         return "#Y这里不是帮派里哦！"
     end
-    if math.abs(self.x - 玩家.X) < 20 and math.abs(self.y - 玩家.Y) < 20 then
+    if math.abs(self.x - 玩家.X) < 200 and math.abs(self.y - 玩家.Y) < 200 then
         self.进度 = self.进度 + 1
         if math.random(3, 5) <= self.进度 then
             self.除草 = true

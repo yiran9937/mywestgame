@@ -34,7 +34,7 @@ function 任务:添加任务(玩家, t)
             r:删除()
         end
     end
-    self.时间 = os.time() + 60 * 60 * 6
+    self.时间 = os.time() + 60 * 60 * 24 * 30
     self.图标 = t.id
     self.符文id = t.id
     self.符文名称 = t.名称
@@ -52,7 +52,7 @@ end
 function 任务:抗性符文计算(玩家)
     if type(玩家) == 'table' then
         if type(self.属性) == 'string' then
-            print(self.属性)
+            print(玩家.抗性)
             玩家.抗性[self.属性] = 玩家.抗性[self.属性] + self.数值
         else
             for k, v in pairs(self.属性) do

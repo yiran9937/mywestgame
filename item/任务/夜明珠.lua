@@ -17,7 +17,7 @@ function 物品:使用(对象)
             local 任务 = 对象:取任务('坐骑1_信字当头')
             if 任务 then
                 local r = 对象:进入战斗('scripts/war/坐骑剧情/坐骑1_鱼怪.lua')
-                if r and math.random(100) <= 60 then
+                if r and math.random(100) <= 100 then
                     local 添加物品 = 对象:添加物品({生成物品 {名称 = '避水珠', 数量 = 1, 禁止交易 = true}})
                     if 添加物品 then
                         任务:更新避水珠()

@@ -45,15 +45,15 @@ function NPC:领取鬼王任务(玩家)
         return
     end
 
-    for _, v in 玩家:遍历队伍() do
-        if not v:剧情称谓是否存在(10) then
-            table.insert(t, v.名称)
-        end
-    end
-    if #t > 0 then
-        玩家:常规提示('#Y' .. table.concat(t, '、 ') .. '没有完成十称，无法领取')
-        return
-    end
+    -- for _, v in 玩家:遍历队伍() do
+    --     if not v:剧情称谓是否存在(10) then
+    --         table.insert(t, v.名称)
+    --     end
+    -- end
+    -- if #t > 0 then
+    --     玩家:常规提示('#Y' .. table.concat(t, '、 ') .. '没有完成十称，无法领取')
+    --     return
+    -- end
 
     for _, v in 玩家:遍历队伍() do
         if v:取任务('日常_鬼王任务') then
