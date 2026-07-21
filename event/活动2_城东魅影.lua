@@ -12,7 +12,7 @@ function 事件:事件初始化()
         local month = tonumber(os.date('%m', os.time()))
         local day = tonumber(os.date('%d', os.time()))
         self.开始时间 = os.time { year = year, month = month, day = day, hour = 08, min = 00, sec = 00 }
-        self.结束时间 = os.time { year = year, month = month, day = day, hour = 22, min = 00, sec = 00 }
+        self.结束时间 = os.time { year = year, month = month, day = day, hour = 23, min = 59, sec = 59 }
         self.是否结束 = false
     end
 end

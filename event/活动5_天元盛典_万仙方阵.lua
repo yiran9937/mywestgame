@@ -12,8 +12,8 @@ function 事件:事件初始化()
         local year = tonumber(os.date('%Y', os.time()))
         local month = tonumber(os.date('%m', os.time()))
         local day = tonumber(os.date('%d', os.time()))
-        self.开始时间 = os.time { year = year, month = month, day = day, hour = 08, min = 00, sec = 00 }
-        self.结束时间 = os.time { year = year, month = month, day = day, hour = 22, min = 00, sec = 00 }
+        self.开始时间 = os.time { year = year, month = month, day = day, hour = 00, min = 00, sec = 00 }
+        self.结束时间 = os.time { year = year, month = month, day = day, hour = 23, min = 59, sec = 59 }
         self.是否结束 = false
     end
 end
@@ -33,7 +33,7 @@ local _主怪信息 = {
     { 名称 = '金甲天兵', 模型 = 2130, 数量 = 6 },
 }
 
-local _地图 = { 1193, 1194, 1110, 1091, 1174, 1028 }
+local _地图 = { 1193, 1194, 1110, 1091, 1174 } -- 长安城东 五指山 大唐境内 长寿村外 北惧芦洲
 
 function 事件:清除所有怪物()
     for ii, vv in ipairs(_地图) do
@@ -83,12 +83,12 @@ function 事件:更新()
         end
     end
     self:发送系统('#Y【万仙方阵】#G天庭举办天界盛典竟有妖怪混入，诸君可以三人及以上组队，速速前往#Y%s，#G寻找天庭的万仙方阵捉拿妖怪。', table.concat(地图组, '、'))
-    return 1800
+    return 900
 end
 
 function 事件:事件开始()
     self:更新()
-    self:定时(1800, self.更新)
+    self:定时(900, self.更新)
     print('万仙方阵活动开始')
 end
 
@@ -188,13 +188,15 @@ function 事件:掉落包(玩家, NPC)
     end
     玩家:增加活动限制次数('万仙方阵')
 
-    local 经验 = 863600 * 3
+    local 经验 = 1863600 * 3
     玩家:添加任务经验(经验)
     玩家:添加法宝经验(500 * 3)
 
     local 掉落包 = 取掉落包('活动', '天元盛典')
     if 掉落包 then
-        奖励掉落包物品(玩家, 掉落包['万仙方阵'], _广播)
+        for _ = 1, 2 do
+            奖励掉落包物品(玩家, 掉落包['万仙方阵'], _广播)
+        end
     end
 end
 

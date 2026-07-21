@@ -12,8 +12,8 @@ function 事件:事件初始化()
         local year = tonumber(os.date('%Y', os.time()))
         local month = tonumber(os.date('%m', os.time()))
         local day = tonumber(os.date('%d', os.time()))
-        self.开始时间 = os.time { year = year, month = month, day = day, hour = 08, min = 00, sec = 00 }
-        self.结束时间 = os.time { year = year, month = month, day = day, hour = 22, min = 00, sec = 00 }
+        self.开始时间 = os.time { year = year, month = month, day = day, hour = 00, min = 00, sec = 00 }
+        self.结束时间 = os.time { year = year, month = month, day = day, hour = 23, min = 59, sec = 59 }
         self.是否结束 = false
     end
 end
@@ -235,15 +235,14 @@ function 事件:掉落包(玩家)
 
     玩家:增加活动限制次数('金玉满堂')
 
-    local 经验 = 661024 * 3
-    玩家:添加经验(经验)
-    玩家:添加参战召唤兽经验(经验 * 1.5)
-
+    local 经验 = 1661024 * 3
+    玩家:添加任务经验(经验)
 
     local 掉落包 = 取掉落包('活动', '金玉满堂')
     if 掉落包 then
-        奖励掉落包物品(玩家, 掉落包, _广播)
-
+        for _ = 1, 2 do
+            奖励掉落包物品(玩家, 掉落包, _广播)
+        end
     end
 end
 
