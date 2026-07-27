@@ -157,7 +157,7 @@ function NPC:NPC菜单(玩家, i)
         elseif r.飞升 == 2 then --第三次飞升
             local cs = 玩家:选择窗口(对话2)
             if cs and _初值[cs] then
-                if not 玩家:扣除银子(1000000) then
+                if not 玩家:扣除银子(100000) then
                     return "需要500W的费用,没有钱我很难为你做事啊！#24"
                 end
                 r:飞升处理(_初值[cs])
@@ -180,7 +180,7 @@ function NPC:NPC菜单(玩家, i)
 
         local cs = 玩家:选择窗口(对话2)
         if cs and _初值[cs] then
-            if not 玩家:扣除银子(1000000) then
+            if not 玩家:扣除银子(100000) then
                 return "修改飞升初值点需要100W的费用,没有钱我很难为你做事啊！#24"
             end
             r:神兽更换飞升初值(_初值[cs])
@@ -216,7 +216,7 @@ function NPC:NPC菜单(玩家, i)
                 return "只有旧版神兽才可以更换造型!"
             end
 
-            if not 玩家:扣除银子(1000000) then
+            if not 玩家:扣除银子(100000) then
                 return "修改造型需要100W的费用,没有钱我很难为你做事啊！#24"
             end
 

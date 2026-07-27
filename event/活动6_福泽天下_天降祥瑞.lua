@@ -12,13 +12,13 @@ function 事件:事件初始化()
         local year = tonumber(os.date('%Y', os.time()))
         local month = tonumber(os.date('%m', os.time()))
         local day = tonumber(os.date('%d', os.time()))
-        self.开始时间 = os.time { year = year, month = month, day = day, hour = 08, min = 00, sec = 00 }
-        self.结束时间 = os.time { year = year, month = month, day = day, hour = 22, min = 00, sec = 00 }
+        self.开始时间 = os.time { year = year, month = month, day = day, hour = 00, min = 00, sec = 00 }
+        self.结束时间 = os.time { year = year, month = month, day = day, hour = 23, min = 59, sec = 59 }
         self.是否结束 = false
     end
 end
 
-local _地图 = { 1208, 1193, 1194, 1110, 1091, 1070, 1092, 1173, }
+local _地图 = { 1193, 1194, 1110, 1091, 1070, 1092, 1173, }  --长寿村外
 
 local _主怪信息 = {
     { 名称 = '瑞云', 模型 = 2150, 数量 = 20 },
@@ -627,13 +627,15 @@ function 事件:掉落包(玩家, NPC)
     end
     玩家:增加活动限制次数('天降祥瑞')
 
-    local 经验 = 350000 * 3
+    local 经验 = 650000 * 3
     玩家:添加任务经验(经验)
     玩家:添加法宝经验(500 * 3)
 
     local 掉落包 = 取掉落包('活动','天降祥瑞')
     if 掉落包 then
-        奖励掉落包物品(玩家, 掉落包, _广播[math.random(1, 3)])
+        for _ = 1, 2 do
+            奖励掉落包物品(玩家, 掉落包, _广播[math.random(1, 3)])
+        end
     end
 end
 

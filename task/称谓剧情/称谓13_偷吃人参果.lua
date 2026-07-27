@@ -206,14 +206,14 @@ function 任务:任务NPC对话(玩家, NPC)
                 self.进度 = 1
             end
         elseif self.进度 == 3 then
-            if 玩家.外形 == 2033 then
+            -- if 玩家.外形 == 2033 then
                 self.对话进度 = self.对话进度 + 1
                 NPC.台词, NPC.头像, NPC.结束 = self:取对话(玩家)
                 if self.对话进度 == 23 then
-                    self:清除变身(玩家)
+                    -- self:清除变身(玩家)
                     self.进度 = 4
                 end
-            end
+            -- end
         elseif self.进度 == 7 then
             if self.对话进度 == 44 or self.对话进度 == 46 then
                 self.对话进度 = self.对话进度 + 1
@@ -241,7 +241,7 @@ function 任务:任务NPC对话(玩家, NPC)
                 self.对话进度 = self.对话进度 + 1
                 NPC.台词, NPC.头像, NPC.结束 = self:取对话(玩家)
                 if self.对话进度 == 16 then
-                    self:变身毒蜂(玩家)
+                    -- self:变身毒蜂(玩家)
                     self.进度 = 3
                 end
             end
@@ -373,9 +373,9 @@ end
 
 function 任务:检查毒蜂(玩家)
     for k, v in 玩家:遍历召唤() do
-        if v.外形 == 2033 then
+        -- if v.外形 == 2033 then
             return true
-        end
+        -- end
     end
 end
 
@@ -386,16 +386,16 @@ local _毒蜂 = {
 }
 
 function 任务:变身毒蜂(玩家)
-    local r = 生成任务 { 名称 = '变身卡', 外形 = 2033 }
-    r:添加任务(玩家)
+   -- local r = 生成任务 { 名称 = '变身卡', 外形 = 2033 }
+   --  r:添加任务(玩家)
 end
 
 function 任务:清除变身(玩家)
-    local r = 玩家:取任务('变身卡')
-    if r then
-        r:删除()
-    end
-    玩家:刷新外形()
+    -- local r = 玩家:取任务('变身卡')
+    -- if r then
+    --    r:删除()
+    -- end
+    -- 玩家:刷新外形()
 end
 
 function 任务:完成(玩家)

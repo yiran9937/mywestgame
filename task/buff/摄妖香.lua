@@ -5,7 +5,7 @@ local 任务 = {
 }
 
 function 任务:任务初始化(玩家, ...)
-    self.时间 = os.time() + 60 * 60
+    self.时间 = os.time() + 60 * 60 * 24 * 30
 end
 
 function 任务:任务上线(玩家)
@@ -18,7 +18,7 @@ function 任务:摄妖香()
 end
 
 function 任务:添加时间()
-    self.时间 = self.时间  + 3600
+    self.时间 = self.时间  + 3600 * 24 * 30
 end
 
 function 任务:任务更新(玩家, sec)

@@ -6,13 +6,13 @@ local 事件 = {
 
 function 事件:事件初始化()
     -- 开启时间：周日中午12点到晚上22点
-    if os.date('%w', os.time()) == '7' then
+    if os.date('%w', os.time()) == '0' then
         print('星期天，开启齐力擎天活动')
         local year = tonumber(os.date('%Y', os.time()))
         local month = tonumber(os.date('%m', os.time()))
         local day = tonumber(os.date('%d', os.time()))
-        self.开始时间 = os.time { year = year, month = month, day = day, hour = 12, min = 00, sec = 00 }
-        self.结束时间 = os.time { year = year, month = month, day = day, hour = 22, min = 00, sec = 00 }
+        self.开始时间 = os.time { year = year, month = month, day = day, hour = 00, min = 00, sec = 00 }
+        self.结束时间 = os.time { year = year, month = month, day = day, hour = 23, min = 59, sec = 59 }
         self.是否结束 = false
     end
 end

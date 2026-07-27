@@ -26,65 +26,97 @@ function 任务:添加任务(玩家)
     return true
 end
 
-function 任务:任务战斗开始(对象, 玩家) --对象是战斗对象数据
-    if not self.附加 or not 玩家 then
+function 任务:任务战斗开始(对象, 玩家) -- 对象是战斗对象数据
+    if not 玩家 or not self.附加 then
         return
     end
 
     local 种族差 = 0
-    local 总亲和 = 0
+    local 总亲和 = self.亲和力 or 0 -- 初始值包含玩家自己的亲和力
     local 重复差 = 0
-    local 自身亲和力 = self.亲和力 * 5 or 0
+    local 亲和力数值 = self.亲和力 or 0
+    local 自身亲和力 = 亲和力数值 * 5
     local bskxz = 1
+
     if 玩家.是否组队 then
         for _, value in 玩家:遍历队伍() do
-            local r = value:取任务("变身卡")
-            if r then
-                if r.种类 ~= self.种类 then
+            -- 【核心修复】：排除玩家自己，只比对队友！
+            if value ~= 玩家 then
+                local r = value:取任务("变身卡")
+                if r then
+                    if r.种类 ~= self.种类 then
+                        种族差 = 种族差 + 5
+                    end
+                    if r.亲和力 then
+                        总亲和 = 总亲和 + r.亲和力
+                    end
+                    if r.属性id == self.属性id and r.外形 == self.外形 then
+                        重复差 = 重复差 + 18
+                    end
+                else
                     种族差 = 种族差 + 5
                 end
-                if r.亲和力 then
-                    总亲和 = 总亲和 + r.亲和力
-                end
-                if r.属性id == self.属性id and r.外形 == self.外形 then
-                    重复差 = 重复差 + 18
-                end
-            else
-                种族差 = 种族差 + 5
             end
         end
+
         bskxz = math.floor((214 - 种族差 - 重复差 - math.abs(总亲和 - 自身亲和力) * 2)) * 0.01
         if bskxz < 1 then
             bskxz = 1
         end
     end
 
-    for i, v in ipairs { "金", "木", "水", "火", "土" } do
-        对象[v] = (玩家[v] or 0) + self.五行[i]
+    -- 结算五行
+    if self.五行 then
+        for i, v in ipairs { "金", "木", "水", "火", "土" } do
+            对象[v] = (玩家[v] or 0) + (self.五行[i] or 0)
+        end
     end
+
+    -- 结算附加属性（已修改：全属性享受 bskxz 放大加成）
     if self.附加 then
         for _, v in ipairs(self.附加) do
-            local n = math.floor(v[2] * bskxz) * 0.01
-            if v[1] == "气血" then
-                对象.最大气血 = 对象.最大气血 + math.floor(对象.最大气血 * n)
-                对象.气血 = 对象.气血 + math.floor(对象.气血 * n)
-            elseif v[1] == "法力" then
-                对象.最大魔法 = 对象.最大魔法 + math.floor(对象.最大魔法 * n)
-                对象.魔法 = 对象.魔法 + math.floor(对象.魔法 * n)
-            elseif v[1] == "速度" then
+            local 属性名 = v[1]
+            local 基础值 = v[2] or 0
+
+            if 属性名 == "气血" then
+                local n = math.floor(基础值 * bskxz) * 0.01
+                local 增加量 = math.floor((对象.最大气血 or 0) * n)
+                对象.最大气血 = (对象.最大气血 or 0) + 增加量
+                对象.气血 = (对象.气血 or 0) + 增加量
+
+            elseif 属性名 == "法力" then
+                local n = math.floor(基础值 * bskxz) * 0.01
+                local 增加量 = math.floor((对象.最大魔法 or 0) * n)
+                对象.最大魔法 = (对象.最大魔法 or 0) + 增加量
+                对象.魔法 = (对象.魔法 or 0) + 增加量
+
+            elseif 属性名 == "速度" then
                 if 对象.速度 then
+                    local n = math.floor(基础值 * bskxz) * 0.01
                     对象.速度 = 对象.速度 + math.floor(对象.速度 * n)
                 end
-            elseif v[1] == "力量" then
+
+            elseif 属性名 == "力量" then
                 if 对象.攻击 then
+                    local n = math.floor(基础值 * bskxz) * 0.01
                     对象.攻击 = 对象.攻击 + math.floor(对象.攻击 * n)
                 end
-            elseif v[1] == "物理" then
+
+            elseif 属性名 == "物理" then
                 if 对象.攻击 then
-                    对象.攻击 = 对象.攻击 + n
+                    -- 【修改点 1】：物理攻击力增加值乘以组队系数
+                    local 实际加成 = math.floor(基础值 * bskxz)
+                    对象.攻击 = 对象.攻击 + 实际加成
                 end
+
             else
-                对象[v[1]] = 对象[v[1]] and 对象[v[1]] + v[2] or 0 + v[2]
+                -- 【修改点 2】：强法（如加强混乱）、抗性、忽视等所有其他属性，统统乘以组队系数 bskxz
+                local 实际加成 = 基础值 * bskxz
+                local 旧值 = 对象[属性名] or 0
+                对象[属性名] = 旧值 + 实际加成
+
+                -- 调试日志（可按需保留或删除）
+                --print(string.format("[全属性加成] %s: 原基础=%d, 组队系数=%.2f, 实战最终附加=%d", tostring(属性名), 基础值, bskxz, 实际加成))
             end
         end
     end
