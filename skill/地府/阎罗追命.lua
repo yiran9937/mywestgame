@@ -35,7 +35,8 @@ function 法术:法术取伤害(攻击方, 挨打方)
     local 扣蓝 = self:取MP伤害()
     扣蓝 = math.floor(扣蓝 * 0.01 * 挨打方.魔法)
     if 挨打方.抗震慑魔法 and 挨打方.抗震慑魔法 > 0 then
-        扣蓝 = math.floor(扣蓝*挨打方.抗震慑魔法/100)
+        -- 扣蓝 = math.floor(扣蓝*挨打方.抗震慑魔法/100)
+        扣蓝 = math.max(1, math.floor(扣蓝 * (100 - 挨打方.抗震慑魔法) / 100))
     end
     local 伤害 = 取震慑伤害(震慑, 攻击方, 挨打方)
 
